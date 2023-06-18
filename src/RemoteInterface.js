@@ -26,6 +26,7 @@ class RemoteInterface {
         // ignore errors! - Without this callback, we can get a ECONNRESET error that crashes the server - KV
       })
     })
+  
       .on('connection', this.handleNewClient.bind(this))
       .on('error', (err) => {
         // handle errors here
@@ -63,6 +64,9 @@ class RemoteInterface {
 
     client.on('data', this.handleClientData.bind(this, client))
     client.on('end', this.handleClientEnded.bind(this, client))
+    client.write('Welcome to snek multiplayer!\n')
+
+
   }
 
   handleClientData(client, data) {
